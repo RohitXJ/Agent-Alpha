@@ -1,16 +1,20 @@
 import os
 import requests
 import base64
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
+import uuid
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 # Replace this URL with your n8n webhook URL
 N8N_WEBHOOK_URL = "http://localhost:5678/webhook-test/f3d9982a-0c81-4847-8e5d-56f1e01cdf1b"
 
 @app.route('/')
 def home():
-    """Renders the main chat interface page."""
+    """Renders the main chat interface page and initializes session."""
+    if 'sessionId' not in session:
+        session['sessionId'] = str(uuid.uuid4())
     return render_template('index.html')
 
 @app.route('/api/chat', methods=['POST'])
@@ -20,13 +24,19 @@ def chat():
     Sends the data to the n8n webhook, ensuring all fields are present.
     """
     try:
+        # Ensure session ID exists
+        if 'sessionId' not in session:
+            session['sessionId'] = str(uuid.uuid4())
+        
+        sessionId = session['sessionId']
         message = request.form.get('message', '')
         file = request.files.get('file')
 
         # Initialize data payload, ensuring message and filename are always present
         data = {
             "message": message,
-            "filename": ""
+            "filename": "",
+            "sessionId": sessionId
         }
         files = {}
 

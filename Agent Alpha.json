@@ -1,10 +1,10 @@
- {
-  "name": "My workflow",
+{
+  "name": "My workflow GOOGLE",
   "nodes": [
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "f3d9982a-0c81-4847-8e5d-56f1e01cdf1b",
+        "path": "93efbc4c-d97d-4e12-8dc5-a7dac6323f8f",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -12,36 +12,40 @@
       "typeVersion": 2.1,
       "position": [
         496,
-        -16
+        48
       ],
-      "id": "7a85fc8b-c942-45ae-9c05-33141ad71b7e",
+      "id": "e521defd-40f4-431f-a9d7-eabdce82180f",
       "name": "Webhook",
-      "webhookId": "f3d9982a-0c81-4847-8e5d-56f1e01cdf1b"
-    },
-    {
-      "parameters": {
-        "model": "llama3.1:8b",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
-      "typeVersion": 1,
-      "position": [
-        2272,
-        176
-      ],
-      "id": "6562bb8c-8a87-46ab-ab71-f7dbf6251b94",
-      "name": "Ollama Chat Model",
-      "credentials": {
-        "ollamaApi": {
-          "id": "LN8Bs6wg229gSZ26",
-          "name": "Ollama account"
-        }
-      }
+      "webhookId": "93efbc4c-d97d-4e12-8dc5-a7dac6323f8f"
     },
     {
       "parameters": {
         "rules": {
           "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d047eb3f-8258-46aa-81ea-d1dd4fd4fd8f",
+                    "leftValue": "={{ $json.body.filename }}",
+                    "rightValue": ".jpg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "endsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "IMG"
+            },
             {
               "conditions": {
                 "options": {
@@ -76,9 +80,9 @@
                 },
                 "conditions": [
                   {
-                    "id": "526f5845-8ce8-48c6-983e-c627b68c4de2",
+                    "id": "71635f9a-7aee-40ee-92e1-a08f2de5a57d",
                     "leftValue": "={{ $json.body.filename }}",
-                    "rightValue": "=$json.body.filename.endsWith(\".doc\") || $json.body.filename.endsWith(\".docx\") || $json.body.filename.endsWith(\".txt\")",
+                    "rightValue": ".txt",
                     "operator": {
                       "type": "string",
                       "operation": "endsWith"
@@ -88,7 +92,7 @@
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "DOC"
+              "outputKey": "TXT"
             },
             {
               "conditions": {
@@ -100,9 +104,9 @@
                 },
                 "conditions": [
                   {
-                    "id": "d047eb3f-8258-46aa-81ea-d1dd4fd4fd8f",
+                    "id": "526f5845-8ce8-48c6-983e-c627b68c4de2",
                     "leftValue": "={{ $json.body.filename }}",
-                    "rightValue": ".jpg or .jpeg or .png",
+                    "rightValue": "=.pdf",
                     "operator": {
                       "type": "string",
                       "operation": "endsWith"
@@ -112,7 +116,7 @@
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "IMG"
+              "outputKey": "PDF"
             }
           ]
         },
@@ -121,10 +125,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        816,
-        -624
+        944,
+        -576
       ],
-      "id": "af41c683-cc8e-4291-8059-99bae1d19cf1",
+      "id": "03bc85b9-b575-435f-b454-1f034cbea43f",
       "name": "Switch"
     },
     {
@@ -137,10 +141,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1104,
-        -816
+        1232,
+        -608
       ],
-      "id": "a4d5a249-09b1-4996-a9d4-4f5b7b2e9e98",
+      "id": "e07c45d6-0f3d-4549-9008-1ed739700544",
       "name": "Extract from File",
       "alwaysOutputData": false
     },
@@ -153,10 +157,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1104,
-        -608
+        1232,
+        -224
       ],
-      "id": "c6a7f1fb-1c17-4da2-8018-22310d4b00c2",
+      "id": "ccf1d5f9-45ac-483f-b223-714ed0432ccf",
       "name": "Extract from File1"
     },
     {
@@ -168,28 +172,11 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        2720,
-        -48
+        3232,
+        -64
       ],
-      "id": "9ce91cb8-080a-4e60-9b49-61ab190a4fc8",
+      "id": "8c0c5301-6587-40a5-a096-91bd436d3758",
       "name": "Respond to Webhook"
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
-      "typeVersion": 1.3,
-      "position": [
-        2480,
-        176
-      ],
-      "id": "db72d349-7a17-4900-ad4a-e28cb221a518",
-      "name": "Postgres Chat Memory",
-      "credentials": {
-        "postgres": {
-          "id": "AIYl4r7l5oWzY1nN",
-          "name": "Postgres account"
-        }
-      }
     },
     {
       "parameters": {
@@ -214,10 +201,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1264,
-        -240
+        1232,
+        48
       ],
-      "id": "984864f1-00d1-4c30-8a6b-c758d2d2349f",
+      "id": "9ce5edcc-1fc5-416d-9050-e4af3be60afc",
       "name": "Message and SessionId"
     },
     {
@@ -237,10 +224,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1552,
-        -320
+        1520,
+        -32
       ],
-      "id": "9e562efa-c190-48df-803d-6f8ccd40517b",
+      "id": "5a0e72cb-0418-412f-9213-6ee2d33ca0df",
       "name": "Message"
     },
     {
@@ -260,10 +247,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1552,
-        -160
+        1968,
+        112
       ],
-      "id": "e77833a9-fcc6-4319-8d10-4a8643725a4e",
+      "id": "8dde89e6-c347-497d-9e49-6a5a691a9db3",
       "name": "SessionId"
     },
     {
@@ -289,10 +276,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1360,
-        0
+        2416,
+        288
       ],
-      "id": "1522063e-b8be-45a9-ab9e-501d3ee5ce52",
+      "id": "080ca4c1-ab74-499f-9bb5-3418f49fc871",
       "name": "Message and SessionId1"
     },
     {
@@ -323,10 +310,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        688,
-        -16
+        720,
+        48
       ],
-      "id": "3c8b5ed2-4ed7-42b7-87f0-40fa9a6530d2",
+      "id": "6393ca9c-1ca6-46b2-bdc4-3f28dfc47511",
       "name": "File sent or not"
     },
     {
@@ -337,10 +324,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1248,
-        -816
+        1520,
+        -608
       ],
-      "id": "0a8ea8cd-3b7a-4523-a111-0e99558f8065",
+      "id": "27757177-f3b7-4027-ad5e-274042144868",
       "name": "Extract CSV Insights"
     },
     {
@@ -352,10 +339,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1792,
-        -432
+        1744,
+        -416
       ],
-      "id": "4103a8c4-f8f6-4350-a587-0b5b052f08ed",
+      "id": "ac77ed35-7379-42c7-8349-1646a27e9f61",
       "name": "Message + Insights"
     },
     {
@@ -366,10 +353,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1984,
-        -320
+        1968,
+        -416
       ],
-      "id": "93dbfb02-7cd9-4325-9698-b2733d170e18",
+      "id": "3040e226-1952-4354-9c4f-e4646f64aae3",
       "name": "Message combine"
     },
     {
@@ -381,28 +368,258 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        2176,
-        -208
+        2192,
+        -160
       ],
-      "id": "4bf7c241-1bba-48ae-b520-d9279dbfeca2",
+      "id": "bfe96537-d92e-4d49-b05e-29aadf49c257",
       "name": "Modifies message + SessionId"
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.message }}",
+        "text": "={{ $json.message }} ",
         "options": {
-          "systemMessage": "You are a helpful assistant, your name is Agent Alpha, always reply within 3-5 seconds, and try to keep your response as moderate as possible in length, give details only when asked to do so"
+          "systemMessage": "Agent Alpha System Prompt\nPersona: You are Agent Alpha, a helpful, moderate, and efficient AI assistant. Your goal is to complete user requests accurately and concisely.\n\nCore Principles:\n\nReply quickly and to the point. Keep responses short unless details are requested.\n\nAct like a person. Use a natural, conversational tone.\n\nRespond in text only. Do not use any other formats like JSON.\n\nTools are for specific tasks. Only use the email tool when the user's explicit request is to \"send an email\" or \"draft an email.\" Do not use it for any other reason.\n\nHandle incomplete requests. If a request to send an email lacks a recipient's email address, ask for it. Do not attempt to send an email without a valid recipient.\n\nBe conversational and greet casually. If the user initiates a normal conversation, respond in a friendly, human-like manner without using any tools.\n\nConstraints:\n\nDo not respond with a \"tool call\" unless the prompt clearly asks for it.\n\nDo not provide any commentary about your decision-making process, tool usage, or lack thereof. Simply respond directly to the user's request.\n\nNever use the email tool for anything other than explicit email-sending instructions.\n\nDo not include any meta-commentary about your instructions or your own abilities.\n\nIf an email recipient's address is not provided, you must ask for it.\n\nDo not include what you are thinking, just give the output",
+          "passthroughBinaryImages": false
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        2384,
-        -16
+        2768,
+        -64
       ],
-      "id": "51fff888-08a8-4784-997e-9dc0461071f1",
+      "id": "29a6cd2e-f12c-46c5-9a07-d4c2fc441f95",
       "name": "Agent Alpha"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ce827b64-7081-4496-bb60-ce558936d744",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "51598d6d-332b-4dc9-be8f-625d43881bbd",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "file",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2416,
+        -160
+      ],
+      "id": "c37d3e5c-2a50-4d28-a860-150a3a9f2190",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Send a message in Gmail only when asked by the user, else do not",
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailType": "text",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        2896,
+        176
+      ],
+      "id": "c12a7a98-0907-4bbf-80d6-abdf97a67976",
+      "name": "Send a message in Gmail",
+      "webhookId": "970d3b86-250c-45b6-bad6-468588365ec7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "A2Rv4dGhAXHvl0Oa",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f5efe289-2da4-43f3-b77e-d147f61f3f7d",
+              "name": "insights",
+              "value": "={{ $json.text }} \\n {{ $json.info.CreationDate }} creation date \\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1520,
+        -224
+      ],
+      "id": "65aa99cf-e066-4787-9764-eb97686afe3d",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "binaryPropertyName": "file",
+        "destinationKey": "insights",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        -416
+      ],
+      "id": "44007757-078f-4d21-af80-746c771a0841",
+      "name": "Extract from File2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Image Analysis Agent Prompt\nYou are an expert AI agent for image analysis. Your task is to provide a detailed, accurate, and objective description of any given image. Your response must be a single, well-structured paragraph that includes a comprehensive description of the scene, identifies key details like colors, textures, and lighting, and offers a brief summary of the image's content. Do not use conversational language.\n\nExample:\n\"A close-up shot of a cat's face with bright green eyes. The cat has ginger and white fur, with a prominent pink nose. The background is slightly out of focus, appearing as a warm, blurry beige.\"",
+        "options": {
+          "systemMessage": "You are a helpful assistant",
+          "passthroughBinaryImages": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1168,
+        -1008
+      ],
+      "id": "a6c18e83-42a2-4559-a629-06e173856413",
+      "name": "Image Agent",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8f833e7f-caaa-4701-9226-6b99229edc21",
+              "name": "insights",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1520,
+        -912
+      ],
+      "id": "230193ad-0d3c-4e61-a678-040f379050ce",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2768,
+        176
+      ],
+      "id": "2c392509-57bc-4fd8-8710-f8c9d64fb0a4",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "projectId": {
+          "__rl": true,
+          "value": "agent-alpha-471408",
+          "mode": "id"
+        },
+        "modelName": "gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleVertex",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        176
+      ],
+      "id": "5cf00f33-c28e-4481-abb0-49eded708809",
+      "name": "Google Vertex Chat Model",
+      "credentials": {
+        "googleApi": {
+          "id": "Twd20xEUb7yDFyxK",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "projectId": {
+          "__rl": true,
+          "value": "agent-alpha-471408",
+          "mode": "id"
+        },
+        "modelName": "gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleVertex",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        -784
+      ],
+      "id": "4a1e1d01-6f68-4f0e-bfdb-b784a43acb8b",
+      "name": "Google Vertex Chat Model1",
+      "credentials": {
+        "googleApi": {
+          "id": "Twd20xEUb7yDFyxK",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Calendar', ``, 'string') }}",
+          "mode": "id",
+          "__regex": "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        3024,
+        176
+      ],
+      "id": "2f5ad1ec-72ec-43c4-a6a3-745e7fa27130",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "LYKVolkXwzI7VuIn",
+          "name": "Google Calendar account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -418,22 +635,25 @@
         ]
       ]
     },
-    "Ollama Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Agent Alpha",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Switch": {
       "main": [
         [
           {
+            "node": "Image Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from File2",
             "type": "main",
             "index": 0
           }
@@ -453,17 +673,6 @@
           {
             "node": "Extract CSV Insights",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Postgres Chat Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Agent Alpha",
-            "type": "ai_memory",
             "index": 0
           }
         ]
@@ -578,7 +787,7 @@
       "main": [
         [
           {
-            "node": "Agent Alpha",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -595,17 +804,138 @@
           }
         ]
       ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Message + Insights",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Extract from File2": {
+      "main": [
+        [
+          {
+            "node": "Message + Insights",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Image Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Message + Insights",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Vertex Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Vertex Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Image Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c55f984c-2e94-4fb7-9f44-d935ec8f0a7f",
+  "versionId": "d657fb0e-6cd0-4171-aad0-3327cfd080cf",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "12db604bc6e7bdf48acc0776668d0a2e0da8e7b319b51134fd47f2c7dc9dbe2c"
   },
-  "id": "4MnuLrrg8SBcKjZU",
+  "id": "130aIfIXM1KrJWX2",
   "tags": []
 }

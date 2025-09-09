@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+doc.txt
+agent-alpha.json
+agent_token.json
+backup/client_secret.json
+n8n/config
+/n8n

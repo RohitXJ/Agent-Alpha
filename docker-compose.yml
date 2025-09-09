@@ -1,9 +1,37 @@
 version: '3.8'
 
 services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ./ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=n8n
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   n8n:
     image: n8nio/n8n:latest
-    container_name: Agent-Alpha
+    container_name: n8n
     restart: unless-stopped
     ports:
       - "5678:5678"
@@ -13,7 +41,14 @@ services:
       - N8N_BASIC_AUTH_PASSWORD=yourpassword
       - N8N_HOST=localhost
       - N8N_PROTOCOL=http
-      - VERTEX_AI_EMAIL=${VERTEX_AI_EMAIL}
-      - VERTEX_AI_PRIVATE_KEY=${VERTEX_AI_PRIVATE_KEY}
+      - OLLAMA_HOST=http://ollama:11434
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=my-postgres
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=postgres
+      - DB_POSTGRESDB_PASSWORD=mysecretpassword
     volumes:
       - ./n8n:/home/node/.n8n
+    depends_on:
+      - ollama
+      - postgres

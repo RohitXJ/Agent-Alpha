@@ -211,4 +211,12 @@ agent-alpha.json
 agent_token.json
 backup/client_secret.json
 n8n/config
-/n8n
+
+# Docker-related ignores
+ollama/
+postgres-data/
+
+# Ignore everything in n8n/ except .json workflow files
+n8n/*
+!n8n/*.json
+

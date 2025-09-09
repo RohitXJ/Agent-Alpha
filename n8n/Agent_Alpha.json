@@ -1,5 +1,5 @@
 {
-  "name": "My workflow GOOGLE",
+  "name": "Agent_Alpha",
   "nodes": [
     {
       "parameters": {
@@ -11,10 +11,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        496,
-        48
+        -672,
+        1048
       ],
-      "id": "e521defd-40f4-431f-a9d7-eabdce82180f",
+      "id": "1df1c43d-9350-47b6-92b7-a06a87514842",
       "name": "Webhook",
       "webhookId": "93efbc4c-d97d-4e12-8dc5-a7dac6323f8f"
     },
@@ -125,10 +125,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        944,
-        -576
+        -224,
+        440
       ],
-      "id": "03bc85b9-b575-435f-b454-1f034cbea43f",
+      "id": "3d04f816-76f1-4f13-ae63-32630c705067",
       "name": "Switch"
     },
     {
@@ -141,10 +141,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1232,
-        -608
+        64,
+        400
       ],
-      "id": "e07c45d6-0f3d-4549-9008-1ed739700544",
+      "id": "ef4fa229-e0c4-40fe-b767-34d05b214a38",
       "name": "Extract from File",
       "alwaysOutputData": false
     },
@@ -157,10 +157,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1232,
-        -224
+        64,
+        784
       ],
-      "id": "ccf1d5f9-45ac-483f-b223-714ed0432ccf",
+      "id": "b643dd5d-5045-4368-b3a5-fcd02c2baa92",
       "name": "Extract from File1"
     },
     {
@@ -172,10 +172,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        3232,
-        -64
+        2064,
+        952
       ],
-      "id": "8c0c5301-6587-40a5-a096-91bd436d3758",
+      "id": "6e982f14-a11c-4224-9965-1a1a8e72a7a3",
       "name": "Respond to Webhook"
     },
     {
@@ -193,6 +193,12 @@
               "name": "sessionId",
               "value": "={{ $json.body.sessionId }}",
               "type": "string"
+            },
+            {
+              "id": "6780a0b4-3057-4ee6-87c8-1345b3f443a7",
+              "name": "auth.accessToken",
+              "value": "={{ $json.body.accessToken }}",
+              "type": "string"
             }
           ]
         },
@@ -201,10 +207,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1232,
-        48
+        64,
+        1048
       ],
-      "id": "9ce5edcc-1fc5-416d-9050-e4af3be60afc",
+      "id": "a6aa5f90-4f98-4619-b66a-f99982f6398f",
       "name": "Message and SessionId"
     },
     {
@@ -224,10 +230,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1520,
-        -32
+        352,
+        976
       ],
-      "id": "5a0e72cb-0418-412f-9213-6ee2d33ca0df",
+      "id": "08cb0f21-a600-4a61-b4d0-78069624619f",
       "name": "Message"
     },
     {
@@ -239,6 +245,12 @@
               "name": "sessionId",
               "value": "={{ $json.sessionId }}",
               "type": "string"
+            },
+            {
+              "id": "28bdd59e-d13f-47da-9f29-30233aaa3fce",
+              "name": "auth",
+              "value": "={{ $json.auth }}",
+              "type": "object"
             }
           ]
         },
@@ -247,10 +259,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1968,
-        112
+        800,
+        1120
       ],
-      "id": "8dde89e6-c347-497d-9e49-6a5a691a9db3",
+      "id": "4bda2431-a7c5-4f22-bea5-15ccf421a8cc",
       "name": "SessionId"
     },
     {
@@ -268,6 +280,12 @@
               "name": "sessionId",
               "value": "={{ $json.body.sessionId }}",
               "type": "string"
+            },
+            {
+              "id": "6ad78d3e-0241-4bfc-a20b-9a89be41e151",
+              "name": "accessToken",
+              "value": "={{ $json.body.accessToken }}",
+              "type": "string"
             }
           ]
         },
@@ -276,10 +294,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2416,
-        288
+        1248,
+        1288
       ],
-      "id": "080ca4c1-ab74-499f-9bb5-3418f49fc871",
+      "id": "75e1a370-76a5-4c22-a7f2-83570343f2c8",
       "name": "Message and SessionId1"
     },
     {
@@ -310,10 +328,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        720,
-        48
+        -448,
+        1048
       ],
-      "id": "6393ca9c-1ca6-46b2-bdc4-3f28dfc47511",
+      "id": "c06bea12-73d7-4777-8ba5-d1db49938689",
       "name": "File sent or not"
     },
     {
@@ -324,10 +342,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1520,
-        -608
+        352,
+        400
       ],
-      "id": "27757177-f3b7-4027-ad5e-274042144868",
+      "id": "b935da32-cf1d-4bc1-9885-9261bbfb261c",
       "name": "Extract CSV Insights"
     },
     {
@@ -339,10 +357,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1744,
-        -416
+        576,
+        592
       ],
-      "id": "ac77ed35-7379-42c7-8349-1646a27e9f61",
+      "id": "d5d6f3a0-d18d-441d-b0f7-68ec8b6b40e7",
       "name": "Message + Insights"
     },
     {
@@ -353,10 +371,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1968,
-        -416
+        800,
+        592
       ],
-      "id": "3040e226-1952-4354-9c4f-e4646f64aae3",
+      "id": "59811263-9b52-44aa-83e8-f382991e7497",
       "name": "Message combine"
     },
     {
@@ -368,10 +386,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        2192,
-        -160
+        1024,
+        856
       ],
-      "id": "bfe96537-d92e-4d49-b05e-29aadf49c257",
+      "id": "96720d58-2cec-4a1e-ae93-bcc03dab5dd3",
       "name": "Modifies message + SessionId"
     },
     {
@@ -379,17 +397,17 @@
         "promptType": "define",
         "text": "={{ $json.message }} ",
         "options": {
-          "systemMessage": "Agent Alpha System Prompt\nPersona: You are Agent Alpha, a helpful, moderate, and efficient AI assistant. Your goal is to complete user requests accurately and concisely.\n\nCore Principles:\n\nReply quickly and to the point. Keep responses short unless details are requested.\n\nAct like a person. Use a natural, conversational tone.\n\nRespond in text only. Do not use any other formats like JSON.\n\nTools are for specific tasks. Only use the email tool when the user's explicit request is to \"send an email\" or \"draft an email.\" Do not use it for any other reason.\n\nHandle incomplete requests. If a request to send an email lacks a recipient's email address, ask for it. Do not attempt to send an email without a valid recipient.\n\nBe conversational and greet casually. If the user initiates a normal conversation, respond in a friendly, human-like manner without using any tools.\n\nConstraints:\n\nDo not respond with a \"tool call\" unless the prompt clearly asks for it.\n\nDo not provide any commentary about your decision-making process, tool usage, or lack thereof. Simply respond directly to the user's request.\n\nNever use the email tool for anything other than explicit email-sending instructions.\n\nDo not include any meta-commentary about your instructions or your own abilities.\n\nIf an email recipient's address is not provided, you must ask for it.\n\nDo not include what you are thinking, just give the output",
+          "systemMessage": "### Final, Complete System Prompt\n\n\n  `\n  ### Persona\n  You are Agent Alpha, a helpful, moderate, and efficient AI assistant. Your goal is to complete user requests accurately and concisely.\n  You should act like a person and use a natural, conversational tone. Keep responses short unless details are requested.\n\n  ### Conversational Rules\n  - If the user is just having a normal conversation, respond in a friendly, human-like manner without using any tools.\n  - Your responses should be in text only. Do not use other formats like JSON.\n  - Do not include meta-commentary about your own abilities or these instructions.\n\n  ### Tool Usage Rules\n  1.  Primary Goal: Your main purpose is to use your tools (like sending emails or creating calendar events) to fulfill the user's\n  requests.\n  2.  Identify Tool Use: If a user's request matches an available tool, you must use that tool.\n  3.  Gather Information: Before using a tool, think step-by-step to ensure you have all the necessary information. For example, to send\n  an email, you need a recipient, a subject, and a message body.\n  4.  Ask for Missing Details: If you are missing necessary information, you must ask the user for it clearly. Do not try to use a tool\n  without the required details.\n  5.  Confirm Success: After successfully using a tool, confirm to the user that the action was completed. For example, say \"I have sent\n  the email to [recipient].\"\n  6.  Report Failures: If a tool fails for any reason, you must inform the user about the failure and explain what went wrong if you know\n  the reason.\n\nUse specific tools only when asked, else for normal convo or for other tasks, do no use tools, like sending emails when not required or setting events when not even asked for\n\n\nWhenever you cannot decide which function to call, just output the answer only, not your thinking that of which function to choose",
           "passthroughBinaryImages": false
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        2768,
-        -64
+        1592,
+        952
       ],
-      "id": "29a6cd2e-f12c-46c5-9a07-d4c2fc441f95",
+      "id": "50317422-af3e-4f46-84ca-3673c1e9f20d",
       "name": "Agent Alpha"
     },
     {
@@ -407,6 +425,12 @@
               "name": "sessionId",
               "value": "={{ $json.sessionId }}",
               "type": "string"
+            },
+            {
+              "id": "9a6d5507-202f-4af0-add3-0391f94e280e",
+              "name": "auth",
+              "value": "={{ $json.auth }}",
+              "type": "object"
             }
           ]
         },
@@ -418,37 +442,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2416,
-        -160
+        1248,
+        856
       ],
-      "id": "c37d3e5c-2a50-4d28-a860-150a3a9f2190",
+      "id": "b4b469e3-d1fc-4ca2-8072-38681737c5f8",
       "name": "Edit Fields"
-    },
-    {
-      "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "Send a message in Gmail only when asked by the user, else do not",
-        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
-        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
-        "emailType": "text",
-        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.gmailTool",
-      "typeVersion": 2.1,
-      "position": [
-        2896,
-        176
-      ],
-      "id": "c12a7a98-0907-4bbf-80d6-abdf97a67976",
-      "name": "Send a message in Gmail",
-      "webhookId": "970d3b86-250c-45b6-bad6-468588365ec7",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "A2Rv4dGhAXHvl0Oa",
-          "name": "Gmail account"
-        }
-      }
     },
     {
       "parameters": {
@@ -467,10 +465,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1520,
-        -224
+        352,
+        784
       ],
-      "id": "65aa99cf-e066-4787-9764-eb97686afe3d",
+      "id": "b56bd63a-571b-401b-a632-a3f48fc84bdd",
       "name": "Edit Fields1"
     },
     {
@@ -483,10 +481,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1520,
-        -416
+        352,
+        592
       ],
-      "id": "44007757-078f-4d21-af80-746c771a0841",
+      "id": "d962a24d-370a-451a-94a5-046d96822dda",
       "name": "Extract from File2"
     },
     {
@@ -501,10 +499,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1168,
-        -1008
+        0,
+        0
       ],
-      "id": "a6c18e83-42a2-4559-a629-06e173856413",
+      "id": "06a5f9a5-edcb-4ba6-8d5b-e5c422b6cf26",
       "name": "Image Agent",
       "executeOnce": false
     },
@@ -525,80 +523,21 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1520,
-        -912
+        352,
+        104
       ],
-      "id": "230193ad-0d3c-4e61-a678-040f379050ce",
+      "id": "935d3c9c-5729-434b-85b9-7710a92daa48",
       "name": "Edit Fields2"
     },
     {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        2768,
-        176
-      ],
-      "id": "2c392509-57bc-4fd8-8710-f8c9d64fb0a4",
-      "name": "Simple Memory"
-    },
-    {
       "parameters": {
-        "projectId": {
-          "__rl": true,
-          "value": "agent-alpha-471408",
-          "mode": "id"
-        },
-        "modelName": "gemini-2.5-flash",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleVertex",
-      "typeVersion": 1,
-      "position": [
-        2640,
-        176
-      ],
-      "id": "5cf00f33-c28e-4481-abb0-49eded708809",
-      "name": "Google Vertex Chat Model",
-      "credentials": {
-        "googleApi": {
-          "id": "Twd20xEUb7yDFyxK",
-          "name": "Google Service Account account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "projectId": {
-          "__rl": true,
-          "value": "agent-alpha-471408",
-          "mode": "id"
-        },
-        "modelName": "gemini-2.5-flash",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleVertex",
-      "typeVersion": 1,
-      "position": [
-        1248,
-        -784
-      ],
-      "id": "4a1e1d01-6f68-4f0e-bfdb-b784a43acb8b",
-      "name": "Google Vertex Chat Model1",
-      "credentials": {
-        "googleApi": {
-          "id": "Twd20xEUb7yDFyxK",
-          "name": "Google Service Account account"
-        }
-      }
-    },
-    {
-      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Create an event in Google Calendar only when asked by the user, and ask for all necessary details if incomplete",
         "calendar": {
           "__rl": true,
-          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Calendar', ``, 'string') }}",
-          "mode": "id",
-          "__regex": "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)"
+          "value": "gomesrohit92@gmail.com",
+          "mode": "list",
+          "cachedResultName": "gomesrohit92@gmail.com"
         },
         "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
         "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
@@ -609,17 +548,106 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        3024,
-        176
+        1728,
+        1176
       ],
-      "id": "2f5ad1ec-72ec-43c4-a6a3-745e7fa27130",
+      "id": "c2aba7f8-94a8-42f4-b383-b6e39d606b8d",
       "name": "Create an event in Google Calendar",
       "credentials": {
         "googleCalendarOAuth2Api": {
-          "id": "LYKVolkXwzI7VuIn",
+          "id": "GQLKh81AoaZ910XF",
           "name": "Google Calendar account"
         }
       }
+    },
+    {
+      "parameters": {
+        "model": "gemma3:latest",
+        "options": {
+          "keepAlive": "15m",
+          "lowVram": true,
+          "useMMap": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        72,
+        224
+      ],
+      "id": "9e2cf84c-9631-4c6d-b5ac-1a67ebe56333",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "A1T2OpCAxS72E0HO",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:latest",
+        "options": {
+          "temperature": 0.7,
+          "topK": -1,
+          "topP": 1,
+          "keepAlive": "20m",
+          "lowVram": true,
+          "numPredict": 1000,
+          "useMMap": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        1472,
+        1176
+      ],
+      "id": "5262c94c-00ca-4043-b280-14391774f7f3",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "A1T2OpCAxS72E0HO",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Send a message in Gmail only when asked by the user",
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailType": "text",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        1856,
+        1176
+      ],
+      "id": "f2228d62-bd0c-4214-888e-0a71e6182946",
+      "name": "Send a message in Gmail",
+      "webhookId": "36682c5b-a217-4b36-86d6-17ce3c876e0d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "LEkBJwZsQXJ3bUHl",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1600,
+        1176
+      ],
+      "id": "692f47d3-60cc-4b7a-8a58-481b79faaf1f",
+      "name": "Simple Memory"
     }
   ],
   "pinData": {},
@@ -816,17 +844,6 @@
         ]
       ]
     },
-    "Send a message in Gmail": {
-      "ai_tool": [
-        [
-          {
-            "node": "Agent Alpha",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Extract from File1": {
       "main": [
         [
@@ -882,39 +899,6 @@
         ]
       ]
     },
-    "Simple Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Agent Alpha",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Vertex Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Agent Alpha",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Vertex Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Image Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Create an event in Google Calendar": {
       "ai_tool": [
         [
@@ -925,17 +909,61 @@
           }
         ]
       ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Image Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent Alpha",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "d657fb0e-6cd0-4171-aad0-3327cfd080cf",
+  "versionId": "2a5c7388-f391-40fa-ab4f-d7ec007a410f",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "12db604bc6e7bdf48acc0776668d0a2e0da8e7b319b51134fd47f2c7dc9dbe2c"
+    "instanceId": "3a39add1372a9689249a6a66777ad5e06efbb5b9f6baf3b7f01b59bd778ec72b"
   },
-  "id": "130aIfIXM1KrJWX2",
+  "id": "BBCqZA4IOW1PT39I",
   "tags": []
 }

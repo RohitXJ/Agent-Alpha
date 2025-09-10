@@ -11,7 +11,7 @@ N8N_WEBHOOK_URL = "http://localhost:5678/webhook/93efbc4c-d97d-4e12-8dc5-a7dac63
 @app.route('/')
 def home():
     """Renders the main chat interface page."""
-    return render_template('index.html')
+    return render_template('dashboard.html')
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -22,11 +22,13 @@ def chat():
     try:
         message = request.form.get('message', '')
         file = request.files.get('file')
+        session_id = request.form.get('sessionId', '') # Extract session ID
 
         # Initialize data payload, ensuring message and filename are always present
         data = {
             "message": message,
-            "filename": ""
+            "filename": "",
+            "sessionId": session_id # Include session ID in the payload
         }
         files = {}
 

@@ -198,11 +198,10 @@
             return bubbleWrapper;
         }
 
-        // --- File Handling ---
         function handleFileSelect(file) {
             if (!file) return;
             
-            fileInput.files = new DataTransfer().files; // Clear previous selection
+            fileInput.files = new DataTransfer().files;
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             fileInput.files = dataTransfer.files;
@@ -243,7 +242,6 @@
             updateSubmitButtonState();
         });
 
-        // --- Paste to Upload ---
         messageInput.addEventListener('paste', (e) => {
             if (e.clipboardData.files.length > 0) {
                 e.preventDefault();
@@ -251,7 +249,6 @@
             }
         });
 
-        // --- Main Chat Submission Logic ---
         const submitForm = async () => {
             const messageContent = messageInput.value.trim();
             const file = fileInput.files[0];
@@ -264,7 +261,7 @@
             
             messageInput.value = '';
             autoGrowTextarea(messageInput);
-            removeFileButton.click(); // Reset file input and preview
+            removeFileButton.click();
             updateSubmitButtonState();
 
             const typingBubble = createChatBubble('...', null, 'ai');
@@ -274,7 +271,7 @@
             if (file) {
                 formData.append('file', file);
             }
-            formData.append('sessionId', sessionId); // Add session ID to the form data
+            formData.append('sessionId', sessionId);
 
             try {
                 const response = await fetch("/api/chat", { method: 'POST', body: formData });
@@ -304,7 +301,6 @@
             submitForm();
         });
 
-        // --- Enter to Send / Shift+Enter for Newline ---
         messageInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -312,11 +308,19 @@
             }
         });
         
-        // --- New Chat Button ---
         newChatButton.addEventListener('click', startNewSession);
 
-        // --- Initial Event Listeners ---
         messageInput.addEventListener('input', () => {
+            updateSubmitButtonState();
+            autoGrowTextarea(messageInput);
+        });
+
+        startNewSession();
+
+    </script>
+</body>
+</html>
+ut.addEventListener('input', () => {
             updateSubmitButtonState();
             autoGrowTextarea(messageInput);
         });

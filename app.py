@@ -10,42 +10,31 @@ N8N_WEBHOOK_URL = "http://localhost:5678/webhook/93efbc4c-d97d-4e12-8dc5-a7dac63
 
 @app.route('/')
 def home():
-    """Renders the main chat interface page."""
     return render_template('dashboard.html')
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    """
-    Handles incoming chat messages and file uploads.
-    Sends the data to the n8n webhook, ensuring all fields are present.
-    """
     try:
         message = request.form.get('message', '')
         file = request.files.get('file')
-        session_id = request.form.get('sessionId', '') # Extract session ID
+        session_id = request.form.get('sessionId', '')
 
-        # Initialize data payload, ensuring message and filename are always present
         data = {
             "message": message,
             "filename": "",
-            "sessionId": session_id # Include session ID in the payload
+            "sessionId": session_id
         }
         files = {}
 
-        # If a file is provided, populate filename and the files payload
         if file and file.filename:
             data['filename'] = file.filename
             files['file'] = (file.filename, file.read(), file.mimetype)
         else:
-            # If no file is provided, send an empty 'file' part to ensure the field exists
             files['file'] = ('', '', 'application/octet-stream')
 
-        # Send the payload to the n8n webhook as multipart/form-data
         response = requests.post(N8N_WEBHOOK_URL, data=data, files=files)
 
-        # Check if the request was successful
         if response.status_code == 200:
-            # Try to parse the response as JSON, but fall back to text if it fails
             try:
                 response_data = response.json()
             except ValueError:

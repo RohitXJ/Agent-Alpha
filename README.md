@@ -21,6 +21,14 @@ The platform includes a user-friendly chat interface, allowing you to interact w
 *   **Cloud Model Integration**: Flexibility to connect to powerful cloud-based models like **Google's Vertex AI / Gemini API** as an alternative to running models locally.
 *   **Pre-configured Chat UI**: A clean, modern chat interface is ready to use out of the box.
 
+## Screenshots
+
+### Agent Alpha Interface
+![Agent Alpha Interface](images/Interface.png)
+
+### n8n Workflow Diagram
+![n8n Workflow Diagram](images/Workflow_Diagram.png)
+
 ## 3. System Requirements
 
 To ensure a smooth experience, please make sure your system meets the following requirements:
